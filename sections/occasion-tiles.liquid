@@ -1,0 +1,63 @@
+{{ 'section-occasion-tiles.css' | asset_url | stylesheet_tag }}
+
+<section class="occasion-tiles section section--surface">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h2 class="occasion-tiles__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}
+      <p class="occasion-tiles__lede">{{ section.settings.lede }}</p>
+    {%- endif -%}
+
+    <div class="occasion-tiles__grid">
+      {%- for block in section.blocks -%}
+        <a class="occasion-tile" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 600 | image_tag:
+               widths: '300, 450, 600',
+               sizes: '(min-width: 880px) 25vw, 50vw',
+               loading: 'lazy',
+               class: 'occasion-tile__img' }}
+          {%- endif -%}
+          <div class="occasion-tile__overlay"></div>
+          <span class="occasion-tile__label">{{ block.settings.label }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by Occasion",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "shop by occasion" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What's the moment?" },
+    { "type": "text", "id": "lede",    "label": "Lede",    "default": "Gifts grouped for the day you're shopping for." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Occasion",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text",         "id": "label", "label": "Label" },
+        { "type": "url",          "id": "link",  "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Shop by Occasion",
+      "blocks": [
+        { "type": "tile", "settings": { "label": "Birthday" } },
+        { "type": "tile", "settings": { "label": "Christmas" } },
+        { "type": "tile", "settings": { "label": "Baby & Kids" } },
+        { "type": "tile", "settings": { "label": "Teacher" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
