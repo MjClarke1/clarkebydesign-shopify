@@ -1,0 +1,36 @@
+.markets-list__head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.markets-list__heading { font-size: var(--fs-h2); margin: 0; }
+.markets-list__link {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy));
+  text-decoration: none;
+}
+.markets-list__list { list-style: none; padding: 0; margin: 0; background: rgb(var(--color-surface)); border-radius: var(--radius-md); }
+.market-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgb(var(--color-line));
+}
+.market-row:last-child { border-bottom: 0; }
+.market-row__date {
+  font-family: var(--font-display);
+  text-align: center;
+  color: rgb(var(--color-blush-deep));
+}
+.market-row__month { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.85; }
+.market-row__day { display: block; font-size: 28px; font-weight: 700; line-height: 1; }
+.market-row__name { font-family: var(--font-display); font-size: 17px; color: rgb(var(--color-navy)); margin: 0; font-weight: 600; }
+.market-row__where { font-size: 13px; color: rgb(var(--color-ink) / 0.7); margin: 2px 0 0; }
+.market-row__time { font-size: 13px; color: rgb(var(--color-ink) / 0.7); }
+.market-row--empty { display: block; text-align: center; padding: 32px; color: rgb(var(--color-ink) / 0.6); font-style: italic; }
+@media (max-width: 600px) {
+  .market-row { grid-template-columns: 56px 1fr; }
+  .market-row__time { grid-column: 2; font-size: 12px; }
+}
