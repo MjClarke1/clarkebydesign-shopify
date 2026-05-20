@@ -1,0 +1,16 @@
+.featured-reviews__heading { font-size: var(--fs-h2); margin: 0 0 8px; }
+.featured-reviews__lede { color: rgb(var(--color-ink) / 0.7); margin-bottom: 28px; }
+.featured-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.review-card {
+  background: rgb(var(--color-bg));
+  border: 1px solid rgb(var(--color-line));
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+.review-card__stars { color: rgb(var(--color-birch)); font-size: 18px; margin-bottom: 8px; letter-spacing: 2px; }
+.review-card__quote { font-family: var(--font-display); font-size: 16px; line-height: 1.5; color: rgb(var(--color-ink)); margin: 0 0 12px; }
+.review-card__name { font-family: var(--font-body); font-weight: 700; color: rgb(var(--color-navy)); font-size: 13px; margin: 0; }
