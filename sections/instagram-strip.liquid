@@ -1,0 +1,43 @@
+{{ 'section-instagram-strip.css' | asset_url | stylesheet_tag }}
+
+<section class="instagram-strip section section--surface">
+  <div class="container">
+    <p class="eyebrow">{{ section.settings.handle }}</p>
+    <h2 class="instagram-strip__heading">{{ section.settings.heading }}</h2>
+    <div class="instagram-strip__grid">
+      {%- for block in section.blocks -%}
+        <a class="ig-tile" href="{{ block.settings.link | default: section.settings.profile_url }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 300 | image_tag: widths: '150, 300', loading: 'lazy', class: 'ig-tile__img' }}
+          {%- else -%}
+            <div class="ig-tile__placeholder"></div>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Strip",
+  "settings": [
+    { "type": "text", "id": "handle",      "label": "Handle (eyebrow)",   "default": "@clarkebydesign3d" },
+    { "type": "text", "id": "heading",     "label": "Heading",            "default": "Follow along on Instagram" },
+    { "type": "url",  "id": "profile_url", "label": "Profile URL fallback","default": "https://instagram.com/clarkebydesign3d" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Post image",
+      "limit": 12,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url",          "id": "link",  "label": "Post URL (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [ { "name": "Instagram Strip" } ]
+}
+{% endschema %}
