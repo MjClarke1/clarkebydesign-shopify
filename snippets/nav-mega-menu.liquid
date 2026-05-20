@@ -1,0 +1,18 @@
+{%- comment -%} Renders a two-column mega-menu for any link with sub-links {%- endcomment -%}
+<div class="mega-menu" role="menu">
+  <div class="mega-menu__inner container">
+    {%- for col in link.links -%}
+      <div class="mega-menu__col">
+        <h4 class="mega-menu__col-title">{{ col.title }}</h4>
+        <ul class="mega-menu__col-list">
+          {%- for sub in col.links -%}
+            <li><a href="{{ sub.url }}">{{ sub.title }}</a></li>
+          {%- endfor -%}
+          {%- if col.links.size == 0 -%}
+            <li><a href="{{ col.url }}">{{ col.title }}</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

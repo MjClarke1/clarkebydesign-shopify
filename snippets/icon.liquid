@@ -1,0 +1,5 @@
+{% comment %}
+  Usage: {% render 'icon', name: 'search', size: 22 %}
+{% endcomment %}
+{%- assign size = size | default: 22 -%}
+<svg width="{{ size }}" height="{{ size }}" aria-hidden="true" class="icon icon-{{ name }}"><use href="#icon-{{ name }}"/></svg>
