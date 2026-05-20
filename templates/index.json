@@ -9,14 +9,131 @@
  */
 {
   "sections": {
-    "hero": { "type": "hero-tiles", "settings": {} },
-    "occasion": { "type": "occasion-tiles", "settings": {} },
-    "bestsellers": { "type": "product-row", "settings": { "heading": "Bestsellers", "collection": "bestsellers" } },
-    "custom_banner": { "type": "custom-banner", "settings": {} },
-    "reviews": { "type": "featured-reviews", "settings": {} },
-    "markets": { "type": "markets-list", "settings": { "limit": 3, "show_link_to_all": true } },
-    "instagram": { "type": "instagram-strip", "settings": {} },
-    "newsletter": { "type": "newsletter", "settings": {} }
+    "hero": {
+      "type": "hero-tiles",
+      "blocks": {
+        "tile_YL4Rbn": {
+          "type": "tile",
+          "settings": {
+            "label": "Keychains",
+            "sub": "120+ designs",
+            "link": ""
+          }
+        },
+        "tile_np3d3w": {
+          "type": "tile",
+          "settings": {
+            "label": "Ornaments",
+            "sub": "Christmas . Easter",
+            "link": ""
+          }
+        },
+        "tile_6xCtwa": {
+          "type": "tile",
+          "settings": {
+            "label": "Teacher Gifts",
+            "sub": "Mrs. ___",
+            "link": ""
+          }
+        },
+        "tile_hEcNbc": {
+          "type": "tile",
+          "settings": {
+            "label": "Custom",
+            "sub": "Request a Piece",
+            "link": "shopify://pages/custom-orders"
+          }
+        }
+      },
+      "block_order": [
+        "tile_YL4Rbn",
+        "tile_np3d3w",
+        "tile_6xCtwa",
+        "tile_hEcNbc"
+      ],
+      "settings": {
+        "eyebrow": "handmade in ontario",
+        "heading": "Personalized gifts, made just for you.",
+        "sub": "Browse a category to get started."
+      }
+    },
+    "occasion": {
+      "type": "occasion-tiles",
+      "settings": {
+        "eyebrow": "shop by occasion",
+        "heading": "What's the moment?",
+        "lede": "Gifts grouped for the day you're shopping for."
+      }
+    },
+    "bestsellers": {
+      "type": "product-row",
+      "settings": {
+        "eyebrow": "bestsellers",
+        "heading": "Bestsellers",
+        "collection": "bestsellers",
+        "product_count": 4,
+        "link_label": "Shop all",
+        "link_url": ""
+      }
+    },
+    "custom_banner": {
+      "type": "custom-banner",
+      "settings": {
+        "badge": "Custom Orders",
+        "heading": "Got something unique in mind?",
+        "lede": "Send us your idea — we'll quote it within 48 hours.",
+        "cta_label": "Request a Custom Piece",
+        "cta_url": ""
+      }
+    },
+    "reviews": {
+      "type": "featured-reviews",
+      "settings": {
+        "eyebrow": "what customers say",
+        "heading": "700+ happy customers",
+        "lede": "And growing every market season.",
+        "limit": 2
+      }
+    },
+    "markets": {
+      "type": "markets-list",
+      "settings": {
+        "eyebrow": "find us in person",
+        "heading": "Upcoming markets",
+        "limit": 3,
+        "show_link_to_all": true,
+        "all_label": "See all markets",
+        "all_url": ""
+      }
+    },
+    "instagram": {
+      "type": "instagram-strip",
+      "settings": {
+        "handle": "@clarkebydesign3d",
+        "heading": "Follow along on Instagram",
+        "profile_url": ""
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "join the list",
+        "heading": "Be the first to know",
+        "lede": "New drops, seasonal restocks, and behind-the-studio sneak peeks.",
+        "placeholder": "you@email.com",
+        "button_label": "Subscribe",
+        "success_message": "Thanks for subscribing — keep an eye on your inbox."
+      }
+    }
   },
-  "order": ["hero", "occasion", "bestsellers", "custom_banner", "reviews", "markets", "instagram", "newsletter"]
+  "order": [
+    "hero",
+    "occasion",
+    "bestsellers",
+    "custom_banner",
+    "reviews",
+    "markets",
+    "instagram",
+    "newsletter"
+  ]
 }
