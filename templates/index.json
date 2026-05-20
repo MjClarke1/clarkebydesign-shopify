@@ -15,6 +15,7 @@
         "tile_YL4Rbn": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/post532049906_17862517077451572_193908402158779642_n.jpg",
             "label": "Keychains",
             "sub": "120+ designs",
             "link": ""
@@ -23,6 +24,7 @@
         "tile_np3d3w": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/post584395706_17873397735451572_4893303492842772214_n.jpg",
             "label": "Ornaments",
             "sub": "Christmas . Easter",
             "link": ""
@@ -31,6 +33,7 @@
         "tile_6xCtwa": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/post574398950_17872073442451572_2621966987530604827_n.jpg",
             "label": "Teacher Gifts",
             "sub": "Mrs. ___",
             "link": ""
@@ -39,6 +42,7 @@
         "tile_hEcNbc": {
           "type": "tile",
           "settings": {
+            "image": "shopify://shop_images/post589065050_17875858095451572_7288484934354089257_n.jpg",
             "label": "Custom",
             "sub": "Request a Piece",
             "link": "shopify://pages/custom-orders"
