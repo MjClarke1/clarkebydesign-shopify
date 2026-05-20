@@ -1,11 +1,13 @@
 {% comment %}
-  Requires a metaobject definition with type `market_event` containing fields:
-  name (text), start_date (date), end_date (date), start_time (text),
-  end_time (text), venue_name (text), address (text), google_maps_url (url),
-  notes (rich_text). Enable Storefronts access.
+  Upcoming markets list — source is the `market_event` metaobject.
 
-  When no metaobject is defined yet (e.g. pre-launch), this section renders
-  the empty-state row gracefully.
+  Metaobject fields (create in admin if not present):
+    name (text), start_date (date), end_date (date),
+    start_time (text), end_time (text), venue_name (text),
+    address (text), google_maps_url (url), notes (rich_text).
+  Enable Storefronts access on the definition.
+
+  Renders the empty-state row gracefully when no entries exist.
 {% endcomment %}
 
 {{ 'section-markets-list.css' | asset_url | stylesheet_tag }}
