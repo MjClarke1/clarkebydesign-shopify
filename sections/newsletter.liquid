@@ -1,0 +1,37 @@
+{{ 'section-newsletter.css' | asset_url | stylesheet_tag }}
+
+<section class="newsletter section">
+  <div class="container newsletter__inner">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 class="newsletter__heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.lede != blank -%}<p class="newsletter__lede">{{ section.settings.lede }}</p>{%- endif -%}
+
+    {% form 'customer', class: 'newsletter__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label for="NewsletterEmail" class="visually-hidden">Email</label>
+      <input id="NewsletterEmail" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required class="newsletter__input">
+      <button type="submit" class="btn btn-primary newsletter__submit">{{ section.settings.button_label }}</button>
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter__msg newsletter__msg--ok">{{ section.settings.success_message }}</p>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p class="newsletter__msg newsletter__msg--err">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "eyebrow",         "label": "Eyebrow",     "default": "join the list" },
+    { "type": "text", "id": "heading",         "label": "Heading",     "default": "Be the first to know" },
+    { "type": "text", "id": "lede",            "label": "Lede",        "default": "New drops, seasonal restocks, and behind-the-studio sneak peeks." },
+    { "type": "text", "id": "placeholder",     "label": "Placeholder", "default": "you@email.com" },
+    { "type": "text", "id": "button_label",    "label": "Button label","default": "Subscribe" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks for subscribing — keep an eye on your inbox." }
+  ],
+  "presets": [ { "name": "Newsletter" } ]
+}
+{% endschema %}

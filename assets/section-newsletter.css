@@ -1,0 +1,20 @@
+.newsletter__inner { text-align: center; max-width: 540px; }
+.newsletter__heading { font-size: var(--fs-h2); margin: 0 0 8px; }
+.newsletter__lede { color: rgb(var(--color-ink) / 0.7); margin: 0 0 24px; }
+.newsletter__form { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.newsletter__input {
+  flex: 1 1 240px;
+  padding: 14px 18px;
+  border: 1.5px solid rgb(var(--color-line));
+  border-radius: var(--radius-pill);
+  background: rgb(var(--color-surface));
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgb(var(--color-navy));
+}
+.newsletter__input:focus { outline: 2px solid rgb(var(--color-navy)); outline-offset: 2px; }
+.newsletter__submit { flex: 0 0 auto; }
+.newsletter__msg { width: 100%; margin: 12px 0 0; font-size: 14px; }
+.newsletter__msg--ok  { color: rgb(var(--color-navy)); }
+.newsletter__msg--err { color: #b5392e; }
+.visually-hidden { position: absolute; left: -9999px; }
