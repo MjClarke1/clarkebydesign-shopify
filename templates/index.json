@@ -63,6 +63,42 @@
     },
     "occasion": {
       "type": "occasion-tiles",
+      "blocks": {
+        "tile_9YCgNp": {
+          "type": "tile",
+          "settings": {
+            "label": "Teacher Appreciation",
+            "link": ""
+          }
+        },
+        "tile_bikjR8": {
+          "type": "tile",
+          "settings": {
+            "label": "First day of",
+            "link": ""
+          }
+        },
+        "tile_tqJf4R": {
+          "type": "tile",
+          "settings": {
+            "label": "Birthday party",
+            "link": ""
+          }
+        },
+        "tile_bWTHNr": {
+          "type": "tile",
+          "settings": {
+            "label": "Christmas",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_9YCgNp",
+        "tile_bikjR8",
+        "tile_tqJf4R",
+        "tile_bWTHNr"
+      ],
       "settings": {
         "eyebrow": "shop by occasion",
         "heading": "What's the moment?",
