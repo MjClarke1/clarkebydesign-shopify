@@ -136,3 +136,15 @@
   .site-header__nav { display: none; }
   .site-header__menu-btn { display: inline-flex; }
 }
+
+@media (max-width: 880px) {
+  .site-header__nav--open {
+    display: block;
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    background: rgb(var(--color-bg));
+    border-bottom: 1px solid rgb(var(--color-line));
+    padding: 16px 24px;
+  }
+  .site-header__nav--open .site-header__nav-list { flex-direction: column; gap: 12px; }
+}
