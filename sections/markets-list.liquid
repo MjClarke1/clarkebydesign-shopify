@@ -1,0 +1,68 @@
+{% comment %}
+  Upcoming markets list — source is the `market_event` metaobject.
+
+  Metaobject fields (create in admin if not present):
+    name (text), start_date (date), end_date (date),
+    start_time (text), end_time (text), venue_name (text),
+    address (text), google_maps_url (url), notes (rich_text).
+  Enable Storefronts access on the definition.
+
+  Renders the empty-state row gracefully when no entries exist.
+{% endcomment %}
+
+{{ 'section-markets-list.css' | asset_url | stylesheet_tag }}
+
+{%- assign all_markets = shop.metaobjects.market_event.values | sort: 'start_date' -%}
+{%- assign limit = section.settings.limit | default: 3 -%}
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
+
+<section class="markets-list section">
+  <div class="container">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <div class="markets-list__head">
+      <h2 class="markets-list__heading">{{ section.settings.heading }}</h2>
+      {%- if section.settings.show_link_to_all -%}
+        <a class="markets-list__link" href="{{ section.settings.all_url }}">{{ section.settings.all_label }} →</a>
+      {%- endif -%}
+    </div>
+
+    <ul class="markets-list__list">
+      {%- assign printed = 0 -%}
+      {%- for m in all_markets -%}
+        {%- assign date_iso = m.start_date | date: '%Y-%m-%d' -%}
+        {%- if date_iso >= today and printed < limit -%}
+          <li class="market-row">
+            <div class="market-row__date">
+              <span class="market-row__month">{{ m.start_date | date: '%b' }}</span>
+              <span class="market-row__day">{{ m.start_date | date: '%-d' }}</span>
+            </div>
+            <div class="market-row__details">
+              <p class="market-row__name">{{ m.name }}</p>
+              <p class="market-row__where">{{ m.venue_name }}</p>
+            </div>
+            <div class="market-row__time">{{ m.start_time }} – {{ m.end_time }}</div>
+          </li>
+          {%- assign printed = printed | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if printed == 0 -%}
+        <li class="market-row market-row--empty">No upcoming markets at the moment — check back soon.</li>
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Upcoming Markets",
+  "settings": [
+    { "type": "text",     "id": "eyebrow",          "label": "Eyebrow",          "default": "find us in person" },
+    { "type": "text",     "id": "heading",          "label": "Heading",          "default": "Upcoming markets" },
+    { "type": "range",    "id": "limit",            "label": "Max markets",      "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_link_to_all", "label": "Show all-markets link", "default": true },
+    { "type": "text",     "id": "all_label",        "label": "All link label",   "default": "See all markets" },
+    { "type": "url",      "id": "all_url",          "label": "All link URL" }
+  ],
+  "presets": [ { "name": "Upcoming Markets" } ]
+}
+{% endschema %}
