@@ -1,0 +1,10 @@
+node_modules/
+.superpowers/
+docs/
+.git/
+*.md
+.gitignore
+.shopifyignore
+package.json
+package-lock.json
+_dawn-archive/

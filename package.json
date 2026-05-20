@@ -1,0 +1,11 @@
+{
+  "name": "clarkebydesign-shopify",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "check": "shopify theme check",
+    "push": "shopify theme push --unpublished",
+    "publish": "shopify theme push --live"
+  }
+}
