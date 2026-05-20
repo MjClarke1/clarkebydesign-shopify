@@ -1,0 +1,72 @@
+{{ 'section-hero-tiles.css' | asset_url | stylesheet_tag }}
+
+<section class="hero-tiles section">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow hero-tiles__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 class="hero-tiles__heading">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+    {%- if section.settings.sub != blank -%}
+      <p class="hero-tiles__sub">{{ section.settings.sub }}</p>
+    {%- endif -%}
+
+    <div class="hero-tiles__grid">
+      {%- for block in section.blocks -%}
+        <a class="hero-tile" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {%- if block.settings.image -%}
+            {{ block.settings.image | image_url: width: 800 | image_tag:
+               widths: '320, 480, 640, 800',
+               sizes: '(min-width: 880px) 25vw, (min-width: 600px) 50vw, 100vw',
+               loading: 'eager',
+               class: 'hero-tile__img' }}
+          {%- endif -%}
+          <div class="hero-tile__overlay"></div>
+          <div class="hero-tile__body">
+            <span class="hero-tile__label">{{ block.settings.label }}</span>
+            {%- if block.settings.sub != blank -%}
+              <span class="hero-tile__sub">{{ block.settings.sub }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero — Category Tiles",
+  "settings": [
+    { "type": "text",     "id": "eyebrow", "label": "Eyebrow",  "default": "handmade in ontario" },
+    { "type": "text",     "id": "heading", "label": "Heading",  "default": "Personalized gifts, made just for you." },
+    { "type": "text",     "id": "sub",     "label": "Subhead",  "default": "Browse a category to get started." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text",         "id": "label", "label": "Label",    "default": "Keychains" },
+        { "type": "text",         "id": "sub",   "label": "Subtitle", "default": "120+ designs" },
+        { "type": "url",          "id": "link",  "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Hero Tiles",
+      "blocks": [
+        { "type": "tile", "settings": { "label": "Keychains", "sub": "120+ designs" } },
+        { "type": "tile", "settings": { "label": "Ornaments", "sub": "Christmas · Easter" } },
+        { "type": "tile", "settings": { "label": "Teacher Gifts", "sub": "Mrs. ___" } },
+        { "type": "tile", "settings": { "label": "Custom", "sub": "Request a Piece" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
