@@ -16,5 +16,4 @@
 .newsletter__submit { flex: 0 0 auto; }
 .newsletter__msg { width: 100%; margin: 12px 0 0; font-size: 14px; }
 .newsletter__msg--ok  { color: rgb(var(--color-navy)); }
-.newsletter__msg--err { color: #b5392e; }
-.visually-hidden { position: absolute; left: -9999px; }
+.newsletter__msg--err { color: rgb(var(--color-error)); }

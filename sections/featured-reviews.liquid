@@ -22,13 +22,15 @@
       {%- for r in reviews limit: section.settings.limit -%}
         <article class="review-card">
           <div class="review-card__stars">
-            {%- for i in (1..r.stars) -%}★{%- endfor -%}
+            {%- if r.stars and r.stars > 0 -%}
+              {%- for i in (1..r.stars) -%}★{%- endfor -%}
+            {%- endif -%}
           </div>
           <p class="review-card__quote">{{ r.quote }}</p>
           <p class="review-card__name">— {{ r.name }}</p>
         </article>
       {%- else -%}
-        <p style="grid-column: 1 / -1; text-align: center; opacity: 0.6;">No featured reviews yet.</p>
+        <p class="featured-reviews__empty">No featured reviews yet.</p>
       {%- endfor -%}
     </div>
   </div>

@@ -14,3 +14,4 @@
 .review-card__stars { color: rgb(var(--color-birch)); font-size: 18px; margin-bottom: 8px; letter-spacing: 2px; }
 .review-card__quote { font-family: var(--font-display); font-size: 16px; line-height: 1.5; color: rgb(var(--color-ink)); margin: 0 0 12px; }
 .review-card__name { font-family: var(--font-body); font-weight: 700; color: rgb(var(--color-navy)); font-size: 13px; margin: 0; }
+.featured-reviews__empty { grid-column: 1 / -1; text-align: center; opacity: 0.6; }

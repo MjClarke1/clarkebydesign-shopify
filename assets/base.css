@@ -17,6 +17,7 @@
   --color-birch: 182 138 101;     /* #B68A65 */
   --color-ink: 31 26 21;          /* #1F1A15 */
   --color-line: 20 42 68 / 0.12;
+  --color-error: 181 57 46;       /* #B5392E */
 
   /* Clarke By Design — Type (locked from spec §2.3) */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
