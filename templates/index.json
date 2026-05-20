@@ -1,13 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero":          { "type": "hero-tiles",        "settings": {} },
-    "occasion":      { "type": "occasion-tiles",    "settings": {} },
-    "bestsellers":   { "type": "product-row",       "settings": { "heading": "Bestsellers", "collection": "bestsellers" } },
-    "custom_banner": { "type": "custom-banner",     "settings": {} },
-    "reviews":       { "type": "featured-reviews",  "settings": {} },
-    "markets":       { "type": "markets-list",      "settings": { "limit": 3, "show_link_to_all": true } },
-    "instagram":     { "type": "instagram-strip",   "settings": {} },
-    "newsletter":    { "type": "newsletter",        "settings": {} }
+    "hero": { "type": "hero-tiles", "settings": {} },
+    "occasion": { "type": "occasion-tiles", "settings": {} },
+    "bestsellers": { "type": "product-row", "settings": { "heading": "Bestsellers", "collection": "bestsellers" } },
+    "custom_banner": { "type": "custom-banner", "settings": {} },
+    "reviews": { "type": "featured-reviews", "settings": {} },
+    "markets": { "type": "markets-list", "settings": { "limit": 3, "show_link_to_all": true } },
+    "instagram": { "type": "instagram-strip", "settings": {} },
+    "newsletter": { "type": "newsletter", "settings": {} }
   },
   "order": ["hero", "occasion", "bestsellers", "custom_banner", "reviews", "markets", "instagram", "newsletter"]
 }
