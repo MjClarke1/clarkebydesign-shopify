@@ -15,6 +15,11 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%} Clarke By Design — Google Fonts: Playfair Display + Inter {%- endcomment -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -296,6 +301,18 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+
+    {%- comment -%} Clarke By Design — palette overrides driven by theme settings {%- endcomment -%}
+    <style>
+      :root {
+        --color-bg: {{ settings.color_bg | color_extract: 'red' }} {{ settings.color_bg | color_extract: 'green' }} {{ settings.color_bg | color_extract: 'blue' }};
+        --color-blush: {{ settings.color_blush | color_extract: 'red' }} {{ settings.color_blush | color_extract: 'green' }} {{ settings.color_blush | color_extract: 'blue' }};
+        --color-blush-deep: {{ settings.color_blush_deep | color_extract: 'red' }} {{ settings.color_blush_deep | color_extract: 'green' }} {{ settings.color_blush_deep | color_extract: 'blue' }};
+        --color-navy: {{ settings.color_navy | color_extract: 'red' }} {{ settings.color_navy | color_extract: 'green' }} {{ settings.color_navy | color_extract: 'blue' }};
+        --color-birch: {{ settings.color_birch | color_extract: 'red' }} {{ settings.color_birch | color_extract: 'green' }} {{ settings.color_birch | color_extract: 'blue' }};
+        --color-ink: {{ settings.color_ink | color_extract: 'red' }} {{ settings.color_ink | color_extract: 'green' }} {{ settings.color_ink | color_extract: 'blue' }};
+      }
+    </style>
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">

@@ -102,6 +102,17 @@
     ]
   },
   {
+    "name": "Clarke Colors",
+    "settings": [
+      { "type": "color", "id": "color_bg",         "label": "Background",       "default": "#F8F1E7" },
+      { "type": "color", "id": "color_blush",      "label": "Blush accent",     "default": "#EAC8C2" },
+      { "type": "color", "id": "color_blush_deep", "label": "Blush deep",       "default": "#D9A89F" },
+      { "type": "color", "id": "color_navy",       "label": "Navy primary",     "default": "#142A44" },
+      { "type": "color", "id": "color_birch",      "label": "Birch wood",       "default": "#B68A65" },
+      { "type": "color", "id": "color_ink",        "label": "Ink text",         "default": "#1F1A15" }
+    ]
+  },
+  {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {
