@@ -148,6 +148,17 @@
     },
     "instagram": {
       "type": "instagram-strip",
+      "blocks": {
+        "tile_aRMk9f": {
+          "type": "tile",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_aRMk9f"
+      ],
       "settings": {
         "handle": "@clarkebydesign3d",
         "heading": "Follow along on Instagram",
