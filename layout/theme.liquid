@@ -399,6 +399,14 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+    {%- comment -%}
+      Clarke By Design — personalization JS only on product templates.
+      Wires chip pickers to variant matching, price updates, and cart eligibility.
+    {%- endcomment -%}
+    {%- if template.name == 'product' -%}
+      <script src="{{ 'product-personalize.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

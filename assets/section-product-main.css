@@ -124,3 +124,10 @@
 .product-page__cta { flex: 1 1 220px; min-height: 52px; }
 .product-page__save { flex: 0 0 auto; gap: 6px; }
 .product-page__cta[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* Active gallery thumb — painted by product-personalize.js when its radio is checked. */
+.product-gallery__thumb.is-active {
+  border-color: rgb(var(--color-navy));
+  outline: 2px solid rgb(var(--color-blush));
+  outline-offset: 2px;
+}
