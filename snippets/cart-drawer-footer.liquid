@@ -1,0 +1,13 @@
+{%- if cart.item_count > 0 -%}
+  <div class="cart-drawer__totals">
+    <span>Subtotal</span>
+    <strong>{{ cart.total_price | money }}</strong>
+  </div>
+  <a href="{{ routes.cart_url }}" class="btn btn-ghost cart-drawer__view-cart">View cart</a>
+  <form action="{{ routes.cart_url }}" method="post" novalidate>
+    <button type="submit" name="checkout" class="btn btn-primary cart-drawer__checkout">Checkout</button>
+  </form>
+  <p class="cart-drawer__note">Taxes and shipping calculated at checkout.</p>
+{%- else -%}
+  <a href="{{ routes.all_products_collection_url }}" class="btn btn-primary cart-drawer__shop">Continue shopping</a>
+{%- endif -%}

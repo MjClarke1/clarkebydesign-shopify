@@ -329,9 +329,11 @@
       {{ 'accessibility.skip_to_text' | t }}
     </a>
 
-    {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer' -%}
-    {%- endif -%}
+    {%- comment -%}
+      Clarke By Design — global cart drawer rendered as a section so it can be
+      refreshed via the section rendering API (`/?section_id=cart-drawer`).
+    {%- endcomment -%}
+    {% section 'cart-drawer' %}
 
     {% sections 'header-group' %}
 
@@ -395,9 +397,8 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- if settings.cart_type == 'drawer' -%}
-      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    {%- comment -%} Clarke By Design — cart drawer loads on every page {%- endcomment -%}
+    <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
 
     {%- comment -%}
       Clarke By Design — personalization JS only on product templates.

@@ -1,1 +1,27 @@
-{%- render 'cart-drawer' -%}
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+
+<div class="cart-drawer" data-cart-drawer hidden aria-hidden="true">
+  <div class="cart-drawer__backdrop" data-cart-drawer-close tabindex="-1"></div>
+
+  <aside class="cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerHeading">
+    <header class="cart-drawer__header">
+      <h2 id="CartDrawerHeading" class="cart-drawer__title">Your cart</h2>
+      <button class="cart-drawer__close" type="button" data-cart-drawer-close aria-label="Close cart">
+        {% render 'icon', name: 'close', size: 20 %}
+      </button>
+    </header>
+
+    <div class="cart-drawer__body" data-cart-drawer-body>
+      {%- comment -%} Populated by cart-drawer.js after each section render fetch. Server-side fallback renders current cart. {%- endcomment -%}
+      {% render 'cart-drawer-contents', cart: cart %}
+    </div>
+
+    <footer class="cart-drawer__footer" data-cart-drawer-footer>
+      {% render 'cart-drawer-footer', cart: cart %}
+    </footer>
+  </aside>
+</div>
+
+{% schema %}
+{ "name": "Cart drawer" }
+{% endschema %}

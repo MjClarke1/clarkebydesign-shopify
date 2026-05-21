@@ -1,0 +1,44 @@
+{%- if cart.item_count == 0 -%}
+  <p class="cart-drawer__empty">Your cart is empty.</p>
+{%- else -%}
+  <ul class="cart-drawer__items" role="list">
+    {%- for item in cart.items -%}
+      <li class="cart-line" data-line-key="{{ item.key }}">
+        <a href="{{ item.url }}" class="cart-line__media">
+          {%- if item.image -%}
+            {{ item.image | image_url: width: 160 | image_tag: widths: '80, 160', loading: 'lazy', alt: item.title, class: 'cart-line__img' }}
+          {%- endif -%}
+        </a>
+        <div class="cart-line__body">
+          <a href="{{ item.url }}" class="cart-line__title">{{ item.product.title }}</a>
+
+          {%- if item.variant.title != 'Default Title' -%}
+            <p class="cart-line__variant">{{ item.variant.title }}</p>
+          {%- endif -%}
+
+          {%- if item.properties != blank -%}
+            <ul class="cart-line__props">
+              {%- for prop in item.properties -%}
+                {%- assign first = prop.first -%}
+                {%- assign last = prop.last -%}
+                {%- assign first_char = first | slice: 0 -%}
+                {%- if first != blank and last != blank and first_char != '_' -%}
+                  <li><span>{{ first }}:</span> {{ last }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <div class="cart-line__qty-row">
+            <div class="cart-line__qty">
+              <button type="button" data-cart-qty-decrement aria-label="Decrease quantity">&minus;</button>
+              <input type="number" min="0" value="{{ item.quantity }}" data-cart-qty-input data-line-key="{{ item.key }}" aria-label="Quantity">
+              <button type="button" data-cart-qty-increment aria-label="Increase quantity">+</button>
+            </div>
+            <span class="cart-line__price">{{ item.final_line_price | money }}</span>
+          </div>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
