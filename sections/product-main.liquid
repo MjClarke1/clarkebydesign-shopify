@@ -184,8 +184,24 @@
           </script>
         </div>
 
+        {%- comment -%}
+          Inert template carrying the "available" CTA label HTML. The JS reads
+          this on restoration so a product that loaded in a Sold out state can
+          still recover the "Add to cart — $X" template when the user picks an
+          available variant. Living inside the form keeps it scoped to this
+          section and avoids any caching of a stale `innerHTML`.
+        {%- endcomment -%}
+        <template data-cta-template>{{ 'products.product.add_to_cart' | t }} — <span data-cta-price>{{ product.selected_or_first_available_variant.price | money }}</span></template>
+
         <div class="product-page__cta-row">
-          <button type="submit" class="btn btn-primary product-page__cta" data-add-to-cart {% unless product.available %}disabled{% endunless %}>
+          {%- comment -%}
+            Initial disabled state: render `disabled` unconditionally.
+            The Name input on this theme is always `required`, so the CTA is
+            never valid at first paint; the JS enables it as soon as a valid
+            Name is entered (and re-disables on sold-out variants). Without
+            this we get a brief enabled flash before JS hydrates.
+          {%- endcomment -%}
+          <button type="submit" class="btn btn-primary product-page__cta" data-add-to-cart disabled data-cta-initial-disabled>
             <span data-cta-label>
               {%- if product.available -%}
                 {{ 'products.product.add_to_cart' | t }} — <span data-cta-price>{{ product.selected_or_first_available_variant.price | money }}</span>

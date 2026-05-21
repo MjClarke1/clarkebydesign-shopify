@@ -34,9 +34,18 @@
 
   if (!form || !variantInput || !ctaBtn || !variantsScript) return;
 
-  // Cache the original CTA label HTML so we can restore the
-  // "Add to cart — $price" template after a Sold out / Unavailable state.
-  const originalCtaLabelHTML = ctaLabel ? ctaLabel.innerHTML : '';
+  // Source of truth for the "Add to cart — $price" CTA template.
+  // Rendered server-side as an inert <template data-cta-template> in the form
+  // (see sections/product-main.liquid). Reading from the template means a
+  // product that loaded in a Sold out state can still recover the
+  // available-state HTML when the user picks an available variant — caching
+  // `ctaLabel.innerHTML` at init would have trapped the literal "Sold out"
+  // string instead. Falls back to whatever is in the label so existing
+  // available-state pages keep working even if the template element is absent.
+  const ctaTemplate = root.querySelector('template[data-cta-template]');
+  const originalCtaLabelHTML = ctaTemplate
+    ? ctaTemplate.innerHTML
+    : (ctaLabel ? ctaLabel.innerHTML : '');
 
   // ---- Parse variant catalogue ---------------------------------------------
   let variants = [];

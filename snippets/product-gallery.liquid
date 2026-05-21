@@ -22,12 +22,21 @@
         {% if forloop.first %}checked{% endif %}
         aria-hidden="true">
       <div class="product-gallery__slide" data-slide="{{ forloop.index }}">
-        {{ img | image_url: width: 1200 | image_tag:
-            widths: '480, 720, 960, 1200',
-            sizes: '(min-width: 900px) 48vw, 100vw',
-            loading: forloop.first | default: false,
-            alt: img.alt | default: product.title,
-            class: 'product-gallery__img' }}
+        {%- if forloop.first -%}
+          {{ img | image_url: width: 1200 | image_tag:
+              widths: '480, 720, 960, 1200',
+              sizes: '(min-width: 900px) 48vw, 100vw',
+              loading: 'eager',
+              alt: img.alt | default: product.title,
+              class: 'product-gallery__img' }}
+        {%- else -%}
+          {{ img | image_url: width: 1200 | image_tag:
+              widths: '480, 720, 960, 1200',
+              sizes: '(min-width: 900px) 48vw, 100vw',
+              loading: 'lazy',
+              alt: img.alt | default: product.title,
+              class: 'product-gallery__img' }}
+        {%- endif -%}
       </div>
     {%- endfor -%}
   </div>
