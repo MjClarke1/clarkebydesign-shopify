@@ -1,0 +1,51 @@
+{%- comment -%}
+  Usage: {% render 'product-gallery', product: product %}
+  Renders a primary image (1:1) + thumb row. Thumbs swap the main via radio inputs.
+{%- endcomment -%}
+
+{%- assign images = product.images -%}
+{%- if images.size == 0 -%}
+  <div class="product-gallery">
+    <div class="product-gallery__main product-gallery__main--empty">
+      <span>No image yet</span>
+    </div>
+  </div>
+{%- else -%}
+<div class="product-gallery" data-gallery>
+  <div class="product-gallery__main">
+    {%- for img in images limit: 8 -%}
+      <input
+        type="radio"
+        name="product-gallery-{{ product.id }}"
+        id="gallery-{{ product.id }}-{{ forloop.index }}"
+        class="product-gallery__radio"
+        {% if forloop.first %}checked{% endif %}
+        aria-hidden="true">
+      <div class="product-gallery__slide" data-slide="{{ forloop.index }}">
+        {{ img | image_url: width: 1200 | image_tag:
+            widths: '480, 720, 960, 1200',
+            sizes: '(min-width: 900px) 48vw, 100vw',
+            loading: forloop.first | default: false,
+            alt: img.alt | default: product.title,
+            class: 'product-gallery__img' }}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if images.size > 1 -%}
+    <ul class="product-gallery__thumbs" role="list">
+      {%- for img in images limit: 8 -%}
+        <li>
+          <label for="gallery-{{ product.id }}-{{ forloop.index }}" class="product-gallery__thumb">
+            {{ img | image_url: width: 200 | image_tag:
+                widths: '100, 200',
+                loading: 'lazy',
+                alt: '',
+                class: 'product-gallery__thumb-img' }}
+          </label>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+{%- endif -%}
