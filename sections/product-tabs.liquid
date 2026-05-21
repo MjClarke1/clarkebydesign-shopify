@@ -1,0 +1,91 @@
+{{ 'section-product-tabs.css' | asset_url | stylesheet_tag }}
+
+{%- assign tabs = section.blocks -%}
+{%- if tabs.size == 0 -%}
+  {%- comment -%} fallback default tabs derived from product fields {%- endcomment -%}
+  <section class="product-tabs section">
+    <div class="container product-tabs__inner">
+      <details class="product-tabs__panel" open>
+        <summary class="product-tabs__summary">
+          <span>Details</span>
+          {% render 'icon', name: 'chevron-down', size: 14 %}
+        </summary>
+        <div class="product-tabs__body rte">
+          {%- if product.description != blank -%}
+            {{ product.description }}
+          {%- else -%}
+            <p>Add a long description in the product editor.</p>
+          {%- endif -%}
+        </div>
+      </details>
+    </div>
+  </section>
+{%- else -%}
+<section class="product-tabs section">
+  <div class="container product-tabs__inner">
+    {%- for block in tabs -%}
+      {%- assign mf_ns = block.settings.metafield_namespace -%}
+      {%- assign mf_key = block.settings.metafield_key -%}
+      {%- assign mf_value = '' -%}
+      {%- if mf_ns != blank and mf_key != blank -%}
+        {%- assign mf_value = product.metafields[mf_ns][mf_key] -%}
+      {%- endif -%}
+
+      {%- comment -%} Skip tab entirely if no content available {%- endcomment -%}
+      {%- assign has_content = false -%}
+      {%- if mf_value != blank -%}{%- assign has_content = true -%}{%- endif -%}
+      {%- if block.settings.content != blank -%}{%- assign has_content = true -%}{%- endif -%}
+      {%- comment -%} The first tab falls back to product.description when nothing else is set, so it always renders {%- endcomment -%}
+      {%- if forloop.first and product.description != blank -%}{%- assign has_content = true -%}{%- endif -%}
+
+      {%- if has_content -%}
+        <details class="product-tabs__panel" {% if forloop.first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="product-tabs__summary">
+            <span>{{ block.settings.label }}</span>
+            {% render 'icon', name: 'chevron-down', size: 14 %}
+          </summary>
+          <div class="product-tabs__body rte">
+            {%- if mf_value != blank -%}
+              {{ mf_value }}
+            {%- elsif block.settings.content != blank -%}
+              {{ block.settings.content }}
+            {%- elsif forloop.first and product.description != blank -%}
+              {{ product.description }}
+            {%- endif -%}
+          </div>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        { "type": "text",     "id": "label",              "label": "Label",                           "default": "Details" },
+        { "type": "richtext", "id": "content",            "label": "Fallback content" },
+        { "type": "text",     "id": "metafield_namespace","label": "Metafield namespace (optional)",  "info": "e.g. 'details'" },
+        { "type": "text",     "id": "metafield_key",      "label": "Metafield key (optional)",        "info": "e.g. 'materials'" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Product tabs",
+      "blocks": [
+        { "type": "tab", "settings": { "label": "Details",              "content": "<p>Add a long description in the product editor.</p>" } },
+        { "type": "tab", "settings": { "label": "Materials & care",     "content": "<p>Made from sustainably sourced birch wood and acrylic. Wipe clean with a soft, damp cloth — avoid harsh chemicals.</p>" } },
+        { "type": "tab", "settings": { "label": "Shipping & turnaround","content": "<p>Most personalized orders ship within 3–5 business days from our Ontario studio. Local pickup is available at checkout.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
