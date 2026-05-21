@@ -1,0 +1,28 @@
+.product-page__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+}
+
+.product-page__gallery,
+.product-page__info {
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .product-page__gallery,
+  .product-page__info {
+    position: sticky;
+    top: 96px; /* sits under the 72px sticky header + breathing room */
+    align-self: start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+  .product-page__gallery::-webkit-scrollbar,
+  .product-page__info::-webkit-scrollbar { width: 0; }
+}
+
+@media (max-width: 900px) {
+  .product-page__grid { grid-template-columns: 1fr; }
+}

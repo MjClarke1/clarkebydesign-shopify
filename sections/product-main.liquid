@@ -1,0 +1,34 @@
+{{ 'section-product-main.css' | asset_url | stylesheet_tag }}
+{{ 'chip-picker.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<section class="product-page section" data-product-main data-product-id="{{ product.id }}">
+  <div class="container product-page__grid">
+    {% comment %} Left column (gallery) — populated in Task 2 {% endcomment %}
+    <div class="product-page__gallery" data-product-gallery>
+      {% render 'product-gallery', product: product %}
+    </div>
+
+    {% comment %} Right column (info + form) — populated in Tasks 3–6 {% endcomment %}
+    <div class="product-page__info">
+      {% comment %} placeholder — populated in later steps {% endcomment %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product main",
+  "settings": [
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor", "default": false },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating", "default": true },
+    { "type": "range",    "id": "char_limit", "label": "Max characters in name", "min": 4, "max": 24, "step": 1, "default": 10 }
+  ],
+  "presets": [
+    { "name": "Product main" }
+  ]
+}
+{% endschema %}
