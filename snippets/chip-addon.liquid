@@ -1,0 +1,26 @@
+{%- comment -%}
+  Renders an add-on option as a card-style radio (variant option 3).
+
+  Accepts:
+  - product:  {Object} product object
+  - option:   {Object} entry from product.options_with_values
+  - value:    {Object} one option value (has .name)
+  - position: {Number} option position (3)
+  - idx:      {Number} forloop.index0 from caller (used for unique input id)
+{%- endcomment -%}
+
+{%- assign label = value.name -%}
+{%- assign input_id = 'addon-' | append: position | append: '-' | append: idx | append: '-' | append: product.id -%}
+
+<label class="chip-addon" for="{{ input_id }}">
+  <input
+    type="radio"
+    id="{{ input_id }}"
+    class="chip-addon__radio"
+    name="options[{{ option.name | escape }}]"
+    value="{{ label | escape }}"
+    data-chip-option="{{ position }}"
+    {% if option.selected_value == label %}checked{% endif %}>
+  <span class="chip-addon__box" aria-hidden="true"></span>
+  <span class="chip-addon__label">{{ label }}</span>
+</label>

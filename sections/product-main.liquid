@@ -60,7 +60,66 @@
 
         {% comment %} Personalization fieldset — populated in Tasks 4 & 5 {% endcomment %}
         <div class="product-page__personalize" data-personalize-root>
-          {% comment %} populated by chip pickers {% endcomment %}
+          {%- comment -%} Name (line-item property — populated in Task 5) {%- endcomment -%}
+          <div class="picker-block" data-picker-name>
+            <label class="picker-block__label" for="properties-Name-{{ section.id }}">
+              {{ 'products.product.personalize.name_label' | t }}
+              <span class="picker-block__hint">{{ 'products.product.personalize.name_help' | t: limit: section.settings.char_limit }}</span>
+            </label>
+            <input
+              type="text"
+              id="properties-Name-{{ section.id }}"
+              name="properties[Name]"
+              class="picker-block__input"
+              maxlength="{{ section.settings.char_limit }}"
+              required
+              autocomplete="off"
+              data-property-name>
+            <span class="picker-block__counter" data-name-counter>0 / {{ section.settings.char_limit }}</span>
+          </div>
+
+          {%- comment -%} Variant-backed options: backer (1), letter (2), addon (3) {%- endcomment -%}
+          {%- for option in product.options_with_values -%}
+            {%- assign pos = forloop.index -%}
+            {%- if pos == 1 -%}
+              <div class="picker-block">
+                <span class="picker-block__label">{{ 'products.product.personalize.backer_label' | t }}</span>
+                <div class="chip-row chip-row--swatch" role="radiogroup" aria-label="{{ option.name | escape }}">
+                  {%- for value in option.values -%}
+                    {% render 'chip-swatch', product: product, option: option, value: value, position: pos, idx: forloop.index0 %}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- elsif pos == 2 -%}
+              <div class="picker-block">
+                <span class="picker-block__label">{{ 'products.product.personalize.letter_label' | t }}</span>
+                <div class="chip-row chip-row--swatch" role="radiogroup" aria-label="{{ option.name | escape }}">
+                  {%- for value in option.values -%}
+                    {% render 'chip-swatch', product: product, option: option, value: value, position: pos, idx: forloop.index0 %}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- elsif pos == 3 -%}
+              <div class="picker-block">
+                <span class="picker-block__label">{{ 'products.product.personalize.addons_label' | t }}</span>
+                <div class="chip-row chip-row--addon" role="radiogroup" aria-label="{{ option.name | escape }}">
+                  {%- for value in option.values -%}
+                    {% render 'chip-addon', product: product, option: option, value: value, position: pos, idx: forloop.index0 %}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- comment -%} Font style (line-item property — populated in Task 5) {%- endcomment -%}
+          <div class="picker-block" data-picker-font>
+            {%- comment -%} populated by Task 5 {%- endcomment -%}
+          </div>
+
+          {%- comment -%} Hidden variant data for JS variant matching (Task 6) {%- endcomment -%}
+          <script type="application/json" data-variants-json>
+            {{ product.variants | json }}
+          </script>
         </div>
 
         <div class="product-page__cta-row">

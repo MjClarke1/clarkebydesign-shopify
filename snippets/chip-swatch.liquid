@@ -1,0 +1,44 @@
+{%- comment -%}
+  Renders a single circular colour swatch chip for a variant option value.
+
+  Accepts:
+  - product:  {Object} product object (passed explicitly; snippets do not inherit caller scope)
+  - option:   {Object} entry from product.options_with_values
+  - value:    {Object} one option value (has .name)
+  - position: {Number} option position (1 = backer, 2 = letter)
+  - idx:      {Number} forloop.index0 from caller (used for unique input id)
+
+  Colour source priority:
+    1) product.metafields.personalization.chip_colors  (JSON object: { "Cream": "#F8F1E7" })
+    2) Deterministic fallback derived from the value name via md5 hash
+{%- endcomment -%}
+
+{%- assign value_name = value.name -%}
+{%- assign color_hex = '' -%}
+
+{%- if product.metafields.personalization.chip_colors.value -%}
+  {%- assign color_hex = product.metafields.personalization.chip_colors.value[value_name] -%}
+{%- endif -%}
+
+{%- if color_hex == blank -%}
+  {%- comment -%} Deterministic fallback so unconfigured products still look reasonable. {%- endcomment -%}
+  {%- assign hash = value_name | md5 | slice: 0, 6 -%}
+  {%- assign color_hex = '#' | append: hash -%}
+{%- endif -%}
+
+{%- assign input_id = 'opt-' | append: position | append: '-' | append: idx | append: '-' | append: product.id -%}
+
+<label class="chip-swatch" for="{{ input_id }}" data-chip-value="{{ value_name | escape }}">
+  <input
+    type="radio"
+    id="{{ input_id }}"
+    class="chip-swatch__radio"
+    name="options[{{ option.name | escape }}]"
+    value="{{ value_name | escape }}"
+    data-chip-option="{{ position }}"
+    {% if option.selected_value == value_name %}checked{% endif %}>
+  <span class="chip-swatch__dot" style="--swatch: {{ color_hex }};" aria-hidden="true">
+    {% render 'icon', name: 'check', size: 14 %}
+  </span>
+  <span class="chip-swatch__name">{{ value_name }}</span>
+</label>

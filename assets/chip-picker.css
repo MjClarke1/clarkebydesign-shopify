@@ -1,0 +1,185 @@
+/* =====================================================================
+   Clarke By Design — chip-picker.css
+   Styles for personalization chip pickers on the product page:
+     - .picker-block         layout for each named option group
+     - .chip-row             flex row of chips
+     - .chip-swatch          circular colour swatch (backer + letter colour)
+     - .chip-addon           card-style radio (add-on, option 3)
+     - .chip-font            font sample card (Task 5 — line-item property)
+   ===================================================================== */
+
+.picker-block { margin-bottom: 22px; }
+
+.picker-block__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--color-navy));
+  margin-bottom: 10px;
+}
+
+.picker-block__hint {
+  display: inline-block;
+  margin-left: 8px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgb(var(--color-ink) / 0.55);
+  font-size: 12px;
+}
+
+.picker-block__input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid rgb(var(--color-line));
+  border-radius: var(--radius-md);
+  background: rgb(var(--color-surface));
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgb(var(--color-ink));
+  transition: border-color 0.15s;
+}
+
+.picker-block__input:focus {
+  outline: 2px solid rgb(var(--color-navy));
+  outline-offset: 2px;
+  border-color: rgb(var(--color-navy));
+}
+
+.picker-block__counter {
+  display: block;
+  font-size: 11px;
+  color: rgb(var(--color-ink) / 0.55);
+  margin-top: 6px;
+  text-align: right;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip-row--swatch { gap: 10px; }
+.chip-row--addon  { flex-direction: column; gap: 8px; }
+.chip-row--fonts  { gap: 10px; }
+
+/* --- Swatch chip --------------------------------------------------- */
+.chip-swatch {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.chip-swatch__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip-swatch__dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--swatch, #ccc);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1.5px rgb(var(--color-line));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.chip-swatch:hover .chip-swatch__dot { transform: translateY(-1px); }
+
+.chip-swatch__radio:checked + .chip-swatch__dot {
+  box-shadow: 0 0 0 2px rgb(var(--color-navy));
+  color: #fff;
+}
+
+.chip-swatch__radio:focus-visible + .chip-swatch__dot {
+  box-shadow: 0 0 0 2px rgb(var(--color-navy)), 0 0 0 4px rgb(var(--color-blush));
+}
+
+.chip-swatch__name {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgb(var(--color-ink) / 0.7);
+  max-width: 60px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* --- Addon chip ---------------------------------------------------- */
+.chip-addon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1.5px solid rgb(var(--color-line));
+  border-radius: var(--radius-md);
+  background: rgb(var(--color-surface));
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.chip-addon:hover { border-color: rgb(var(--color-navy) / 0.4); }
+
+.chip-addon__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip-addon__box {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgb(var(--color-line));
+  background: rgb(var(--color-bg));
+  flex: 0 0 auto;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.chip-addon__radio:checked ~ .chip-addon__box {
+  background: rgb(var(--color-navy));
+  border-color: rgb(var(--color-navy));
+}
+
+.chip-addon__radio:checked ~ .chip-addon__box::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.chip-addon__radio:checked ~ .chip-addon__label {
+  color: rgb(var(--color-navy));
+  font-weight: 600;
+}
+
+.chip-addon:has(.chip-addon__radio:checked) {
+  border-color: rgb(var(--color-navy));
+  background: rgb(var(--color-blush) / 0.15);
+}
+
+.chip-addon__label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgb(var(--color-ink));
+  flex: 1;
+}
