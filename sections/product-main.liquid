@@ -1,9 +1,10 @@
 {{ 'section-product-main.css' | asset_url | stylesheet_tag }}
 {{ 'chip-picker.css' | asset_url | stylesheet_tag }}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet">
+{%- comment -%}
+  Personalization sample fonts (Pacifico, Bebas Neue, Permanent Marker) are
+  loaded once on product pages via `layout/theme.liquid`.
+{%- endcomment -%}
 
 <section class="product-page section" data-product-main data-product-id="{{ product.id }}">
   <div class="container product-page__grid">
@@ -111,9 +112,70 @@
             {%- endif -%}
           {%- endfor -%}
 
-          {%- comment -%} Font style (line-item property — populated in Task 5) {%- endcomment -%}
+          {%- comment -%} Font style — line-item property (`properties[Font]`). {%- endcomment -%}
           <div class="picker-block" data-picker-font>
-            {%- comment -%} populated by Task 5 {%- endcomment -%}
+            <span class="picker-block__label">{{ 'products.product.personalize.font_label' | t }}</span>
+
+            {%- comment -%}
+              Font set source priority:
+                1) `personalization.fonts` product metafield (parsed JSON list)
+                2) Built-in defaults from spec §5.2 — Script / Block / Marker
+              We avoid the `parse_json` filter for the defaults so the picker
+              works on any Shopify plan; metafield values are already parsed by
+              Shopify's `.value` accessor when stored as JSON list.
+            {%- endcomment -%}
+            {%- assign fonts_list = product.metafields.personalization.fonts.value -%}
+
+            <div class="chip-row chip-row--fonts" role="radiogroup" aria-label="{{ 'products.product.personalize.font_label' | t }}">
+              {%- if fonts_list != blank -%}
+                {%- for f in fonts_list -%}
+                  {% render 'chip-font', product: product, font: f, idx: forloop.index, default: forloop.first %}
+                {%- endfor -%}
+              {%- else -%}
+                {%- comment -%} Defaults: Pacifico (script), Bebas Neue (block), Permanent Marker (marker). {%- endcomment -%}
+                {%- capture script_stack -%}'Pacifico', cursive{%- endcapture -%}
+                {%- capture block_stack -%}'Bebas Neue', sans-serif{%- endcapture -%}
+                {%- capture marker_stack -%}'Permanent Marker', cursive{%- endcapture -%}
+
+                {%- comment -%} Render the three defaults inline — avoids needing to synthesise an array in Liquid. {%- endcomment -%}
+                <label class="chip-font" for="font-1-{{ product.id }}" data-chip-value="Script">
+                  <input
+                    type="radio"
+                    id="font-1-{{ product.id }}"
+                    class="chip-font__radio"
+                    name="properties[Font]"
+                    value="Script"
+                    data-font-family="{{ script_stack | escape }}"
+                    checked>
+                  <span class="chip-font__sample" style="font-family: {{ script_stack }};" aria-hidden="true">Aa</span>
+                  <span class="chip-font__name">Script</span>
+                </label>
+
+                <label class="chip-font" for="font-2-{{ product.id }}" data-chip-value="Block">
+                  <input
+                    type="radio"
+                    id="font-2-{{ product.id }}"
+                    class="chip-font__radio"
+                    name="properties[Font]"
+                    value="Block"
+                    data-font-family="{{ block_stack | escape }}">
+                  <span class="chip-font__sample" style="font-family: {{ block_stack }};" aria-hidden="true">Aa</span>
+                  <span class="chip-font__name">Block</span>
+                </label>
+
+                <label class="chip-font" for="font-3-{{ product.id }}" data-chip-value="Marker">
+                  <input
+                    type="radio"
+                    id="font-3-{{ product.id }}"
+                    class="chip-font__radio"
+                    name="properties[Font]"
+                    value="Marker"
+                    data-font-family="{{ marker_stack | escape }}">
+                  <span class="chip-font__sample" style="font-family: {{ marker_stack }};" aria-hidden="true">Aa</span>
+                  <span class="chip-font__name">Marker</span>
+                </label>
+              {%- endif -%}
+            </div>
           </div>
 
           {%- comment -%} Hidden variant data for JS variant matching (Task 6) {%- endcomment -%}

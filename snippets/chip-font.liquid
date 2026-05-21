@@ -1,0 +1,30 @@
+{%- comment -%}
+  Renders a single font-sample chip card. Font is stored as a line-item
+  property (`properties[Font]`) — it does not drive variant inventory.
+
+  Accepts:
+  - product: {Object} product object (passed explicitly; snippets do not inherit caller scope)
+  - font:    {Object} { id, name, family, stack } — e.g. { name: "Script", stack: "'Pacifico', cursive" }
+  - idx:     {Number} 1-based index used to build a unique input id
+  - default: {Boolean} when true, this chip is the initial selected option
+
+  Source: `product.metafields.personalization.fonts` (JSON list) when present,
+  falling back to the three defaults assembled in the calling section.
+{%- endcomment -%}
+
+{%- assign input_id = 'font-' | append: idx | append: '-' | append: product.id -%}
+{%- assign font_name = font.name -%}
+{%- assign font_stack = font.stack -%}
+
+<label class="chip-font" for="{{ input_id }}" data-chip-value="{{ font_name | escape }}">
+  <input
+    type="radio"
+    id="{{ input_id }}"
+    class="chip-font__radio"
+    name="properties[Font]"
+    value="{{ font_name | escape }}"
+    data-font-family="{{ font_stack | escape }}"
+    {% if default %}checked{% endif %}>
+  <span class="chip-font__sample" style="font-family: {{ font_stack }};" aria-hidden="true">Aa</span>
+  <span class="chip-font__name">{{ font_name }}</span>
+</label>
