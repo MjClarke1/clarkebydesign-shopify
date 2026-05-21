@@ -179,7 +179,17 @@
       "taxes_included": "Taxes included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
-      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
+      "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
+      "save": "Save for later",
+      "personalize": {
+        "name_label": "Name",
+        "name_help": "Up to {{ limit }} characters",
+        "backer_label": "Backer colour",
+        "letter_label": "Letter colour",
+        "font_label": "Font style",
+        "addons_label": "Add-ons",
+        "required": "Required"
+      }
     },
     "modal": {
       "label": "Media gallery"

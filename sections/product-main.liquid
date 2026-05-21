@@ -14,7 +14,70 @@
 
     {% comment %} Right column (info + form) — populated in Tasks 3–6 {% endcomment %}
     <div class="product-page__info">
-      {% comment %} placeholder — populated in later steps {% endcomment %}
+      <form
+        method="post"
+        action="{{ routes.cart_add_url }}"
+        id="ProductForm-{{ section.id }}"
+        accept-charset="UTF-8"
+        enctype="multipart/form-data"
+        data-product-form
+        data-product-handle="{{ product.handle }}">
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-id-input>
+
+        {%- if product.collections.first -%}
+          <p class="eyebrow product-page__eyebrow">{{ product.collections.first.title }}</p>
+        {%- endif -%}
+
+        <h1 class="product-page__title">{{ product.title | escape }}</h1>
+
+        {%- if section.settings.show_rating -%}
+          <div class="product-page__rating" aria-label="Star rating">
+            <span class="product-page__stars" aria-hidden="true">★ ★ ★ ★ ★</span>
+            <span class="product-page__rating-count">
+              {%- if product.metafields.reviews.rating_count -%}
+                ({{ product.metafields.reviews.rating_count }} reviews)
+              {%- else -%}
+                (New)
+              {%- endif -%}
+            </span>
+          </div>
+        {%- endif -%}
+
+        <p class="product-page__price" data-product-price>
+          <span data-price-current>{{ product.selected_or_first_available_variant.price | money }}</span>
+          {%- if product.compare_at_price_max > product.price -%}
+            <s data-price-compare>{{ product.compare_at_price_max | money }}</s>
+          {%- endif -%}
+        </p>
+
+        {%- if product.description != blank -%}
+          <div class="product-page__short">
+            {{ product.description | split: '<!-- split -->' | first }}
+          </div>
+        {%- endif -%}
+
+        {% comment %} Personalization fieldset — populated in Tasks 4 & 5 {% endcomment %}
+        <div class="product-page__personalize" data-personalize-root>
+          {% comment %} populated by chip pickers {% endcomment %}
+        </div>
+
+        <div class="product-page__cta-row">
+          <button type="submit" class="btn btn-primary product-page__cta" data-add-to-cart {% unless product.available %}disabled{% endunless %}>
+            <span data-cta-label>
+              {%- if product.available -%}
+                {{ 'products.product.add_to_cart' | t }} — <span data-cta-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+              {%- else -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- endif -%}
+            </span>
+          </button>
+          <button type="button" class="btn btn-ghost product-page__save" data-save-toggle aria-pressed="false">
+            {% render 'icon', name: 'heart', size: 16 %} <span>{{ 'products.product.save' | t }}</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
