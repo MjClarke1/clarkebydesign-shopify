@@ -61,6 +61,47 @@
         "sub": "Browse a category to get started."
       }
     },
+    "trust_strip_AB6tx9": {
+      "type": "trust-strip",
+      "blocks": {
+        "item_tbJY3z": {
+          "type": "item",
+          "settings": {
+            "text": "Handmade in Ontario",
+            "show_check": true
+          }
+        },
+        "item_jCiKrP": {
+          "type": "item",
+          "settings": {
+            "text": "Personalized for you",
+            "show_check": true
+          }
+        },
+        "item_MnGjwp": {
+          "type": "item",
+          "settings": {
+            "text": "Free local pickup",
+            "show_check": true
+          }
+        },
+        "item_gHPGpr": {
+          "type": "item",
+          "settings": {
+            "text": "Ships WORLDWIDE",
+            "show_check": true
+          }
+        }
+      },
+      "block_order": [
+        "item_tbJY3z",
+        "item_jCiKrP",
+        "item_MnGjwp",
+        "item_gHPGpr"
+      ],
+      "name": "Trust Strip",
+      "settings": {}
+    },
     "occasion": {
       "type": "occasion-tiles",
       "blocks": {
@@ -179,6 +220,7 @@
   },
   "order": [
     "hero",
+    "trust_strip_AB6tx9",
     "occasion",
     "bestsellers",
     "custom_banner",
