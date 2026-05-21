@@ -57,7 +57,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 600;
-  color: rgb(var(--color-blush-deep));
+  color: rgb(var(--color-navy) / 0.75);
 }
 
 @media (max-width: 880px) { .hero-tiles__grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
