@@ -29,4 +29,21 @@
     const count = e?.detail?.cart?.item_count ?? 0;
     document.querySelectorAll('[data-cart-count]').forEach((el) => { el.textContent = count; });
   });
+
+  // Scroll-triggered fade-in for homepage sections
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.05 });
+
+    document.querySelectorAll('.section, .hero-tiles, .custom-banner, .markets-list, .featured-reviews, .instagram-strip, .newsletter, .trust-strip').forEach((el) => {
+      el.classList.add('reveal-on-scroll');
+      observer.observe(el);
+    });
+  }
 })();
